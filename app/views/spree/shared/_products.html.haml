@@ -1,0 +1,28 @@
+-# NOTE p is mostly the variant here now.
+
+%h1= params[:pt] rescue ''
+- @products ||= grppd 
+=# @products
+- @products.each do |p|
+  %a.product_row{:href=>product_path(p)}
+    .sale_badge
+      .small Sale
+      - if p.is_coupon? || p.is_hotel_listing?
+        .amt= p.sale_percent + " %" rescue (rand(5)*10).to_s + " %"
+        .off Off
+      - else
+        -if !p.flash_close_on.blank?
+          .amt= (distance_of_time_in_words_to_now(p.flash_close_on)).gsub('days', '')
+        .off= "days left"
+    .product_image
+      = image_tag p.images[0].attachment.url(:product) rescue ''
+    .details
+      %h2= p.name.titleize
+      .star_rating= pretty_star_rating p.star_rating rescue ''
+      .location= p.city + ", " + p.country.truncate(30)   rescue ''
+      .overview= BlueCloth.new(p.description).to_html.html_safe.truncate(140) 
+      Prices starting from
+      %strike= number_to_currency p.striked_price rescue ''
+      %strong
+        %span.price= number_to_currency p.starting_price
+      

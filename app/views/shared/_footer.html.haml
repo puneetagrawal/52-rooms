@@ -1,0 +1,20 @@
+#footer.clearfix
+  .fwc
+    %a#scrolltop{:href=>"#"}
+      Top
+    .col
+      %h3 About
+      - ["About Us", "Contact Us", "Feature Your Business", "Terms of Service", "Feedback", "Twitter"].each do |page|
+        = link_to page, ('/' + page.parameterize)
+    .col
+      %h3 Sales
+      - ["This Week's Sale", "Hot Sales Today"].each do |page|
+        = link_to page, "#"
+    .col
+      %h3 Destinations
+      - ["India", "Places in Asia", "Europe"].each do |page|
+        = link_to page, "#"
+    .col
+      %h3 Tours
+      - ["India", "Places in Asia", "Europe"].each do |page|
+        = link_to page, "#"

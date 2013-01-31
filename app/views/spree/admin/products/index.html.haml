@@ -1,0 +1,75 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+.toolbar{"data-hook" => "toolbar"}
+  %ul.actions
+    %li#new_product_link
+      = button_link_to t(:new_product), new_object_url, { :remote => false, :icon => 'add', :id => 'admin_new_product', :class => 'btn' }
+  %br.clear/
+%h1= t(:listing_products)
+#new_product{"data-hook" => ""}
+%table#listing_products.index
+  %tr{"data-hook" => "admin_products_index_headers"}
+    %th= sort_link @search,:product_type, "Type", { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'}
+    %th= sort_link @search,:name, t(:name), { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'}
+    %th= sort_link @search,:city, t(:city), { :default_order => "desc" }, {:title => 'admin_products_listing_city_title'}
+    %th= sort_link @search,:country, t(:country), { :default_order => "desc" }, {:title => 'admin_products_listing_country_title'}
+    %th Availability
+    %th Prices
+    %th{"data-hook" => "admin_products_index_header_actions"}
+  - @collection.each do |product|
+    %tr{"data-hook" => "admin_products_index_rows", :id => "\#{spree_dom_id product}"}
+      %td
+        %strong= product.product_type rescue ''
+        / - if product.is_flash_sale?
+        /   %br
+        /     - start = product.flash_start_on
+        /     - if start
+        /       - if start > Date.today
+        /         = "(starting in: "
+        /         = distance_of_time_in_words_to_now product.flash_start_on
+        /       - else
+        /         = "(started: "
+        /         = distance_of_time_in_words_to_now product.flash_start_on
+        /         = " ago"
+        /       = " , ending in: "
+        /       = distance_of_time_in_words product.flash_start_on, product.flash_close_on
+        /       = ")"
+      %td= link_to product.try(:name), edit_admin_product_path(product)
+      %td= product.city rescue ' - '      
+      %td= product.country rescue ' - '
+      %td
+        = product.available_dates.first.strftime('%d %b, %Y') rescue ''
+        \---
+        = product.available_dates.last.strftime('%d %b, %Y') rescue ''
+      %td
+        = number_to_currency product.prices_array.first
+        \-
+        = number_to_currency product.prices_array.last
+      %td.actions{"data-hook" => "admin_products_index_row_actions"}
+        = link_to_edit product, :class => 'edit' unless product.deleted?
+        \
+        \#{link_to_clone product, :class => 'clone'}
+        \
+        \#{link_to_delete product unless product.deleted?}
+= paginate @collection
+- content_for :sidebar do
+  %div{"data-hook" => "admin_products_sidebar"}
+    = search_form_for [:admin, @search] do |f|
+      .box
+        %h3= t(:search)
+        - locals = {:f => f}
+        %div{"data-hook" => "admin_products_index_search"}
+          %p
+            = f.label :name_cont, t(:name)
+            %br/
+            = f.text_field :name_cont, :size => 15
+          %p
+            = f.label :variants_including_master_sku_cont, t(:sku)
+            %br/
+            = f.text_field :variants_including_master_sku_cont, :size => 15
+          %p
+            = f.label :deleted_at_null, t(:show_deleted)
+            %br/
+            = f.check_box :deleted_at_null, {:checked => params[:q][:deleted_at_null].blank?}, '', '1'
+        %div{"data-hook" => "admin_products_index_search_buttons"}
+          %p.form-buttons
+            = button t(:search)

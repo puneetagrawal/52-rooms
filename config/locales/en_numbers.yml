@@ -1,0 +1,11 @@
+# -*- coding: iso-8859-1 -*-
+---
+en:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "Rs."
+        precision: 2
+        separator: '.'
+        delimiter: ','

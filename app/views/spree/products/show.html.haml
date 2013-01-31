@@ -1,0 +1,49 @@
+#hotel_title
+  .name
+    %h1= @product.name
+    = rating_stars_tag (@product.star_rating)
+    = address_tag @product
+  .prices
+    .small Rates from
+    .striked_price
+      %strike= number_to_indian_currency @product.striked_price rescue ' '
+      %span.small (Hotel Rate)
+    .sale_price
+      = number_to_indian_currency @product.starting_price rescue ' '
+      %span.small / Per Night
+#slider
+  = image_tag @product.images[0].attachment.url(:slider), :class => "slider_image" rescue ''
+  .sale_badge
+    Sale
+    = @product.sale_percent
+    \% off
+  #slider_nav
+    - @product.images.each do |img|
+      %a{:href=>"#"}
+        = image_tag img.attachment.url :slider_thumb
+#content
+  .left_col
+    = render :partial => "sharing"
+    = render :partial => "cart_form"
+
+  .right_col
+    %ul.tab_nav
+      - [:overview, :location_and_attractions, :rooms, :amenities_html, :reviews].each_with_index do |x, i|
+        %li
+          - if i==0
+            %a{:href => "#", :class=>"tab active", :rel=>x.to_s}= x.to_s.gsub("_", " ").titleize
+          - else
+            %a{:href => "#", :class=>"tab", :rel=>x.to_s}= x.to_s.gsub("_", " ").titleize
+    %ul.tabcontent
+      -  [:overview, :location_and_attractions, :rooms, :amenities_html, :reviews].each do |key|
+        %li.tab_content{:id=>key.to_s}          
+          %h2= key.to_s.gsub("_", " ").titleize    
+          = render "/spree/products/#{key.to_s}_product"      
+          = BlueCloth.new(@product.send(key)).to_html.html_safe 
+
+         
+
+
+
+
+

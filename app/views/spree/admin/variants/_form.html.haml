@@ -1,0 +1,51 @@
+%div{"data-hook" => "admin_variant_form_fields"}
+  .clearfix
+    .left{"data-hook" => "variants"}
+      - option = @product.options.first      
+      %p{"data-hook" => "presentation"}
+        = label :new_variant, option.option_type.presentation
+        - if @variant.new_record?       
+          
+          / - option.option_type.option_values.delete_if{|inov| p @product.f2r_hotel_inventory_items.map{|inv| (inov.id!=inv.room_type.to_i) }[0]  } 
+          -if @product.product_type=='Coupon'
+            = select(:new_variant, option.option_type.presentation,                        |
+            option.option_type.option_values.collect {|ov| [ ov.presentation, ov.id ] }, |
+            {})  
+          -else
+            -option_select=Array.new
+            -unless option.option_type.option_values.blank? and @product.f2r_hotel_inventory_items.blank? 
+              -option.option_type.option_values.each do |opv|
+                - @product.f2r_hotel_inventory_items.each do |inv|             
+                  -if opv.id.to_i == inv.room_type.to_i
+                    -option_select<< opv        
+        
+            = select(:new_variant, option.option_type.presentation,                        |
+              option_select.collect {|ov| [ ov.presentation, ov.id ] }, |
+              {})                                                                          |
+        - else
+          - opt = @variant.option_values.detect {|o| o.option_type == option.option_type }.presentation
+          = text_field(:new_variant,  option.option_type.presentation, :value => opt, :disabled => 'disabled')
+      %p{"data-hook" => "sku"}
+        = f.label :sku, t(:sku)
+        = f.text_field :sku
+      %p{"data-hook" => "price"}
+        = f.label :price, "Price per night per person"
+        = f.text_field :price
+      %p{"data-hook" => "cost_price"}
+        = f.label :cost_price, t(:cost_price)
+        = f.text_field :cost_price
+      - if Spree::Config[:track_inventory_levels]
+        -if @product.product_type=='Coupon'
+          %p{"data-hook" => "on_hand"}
+            = f.label :on_hand, "Available stock, per day"
+            = f.text_field :on_hand
+      
+    .right{"data-hook" => "admin_variant_form_additional_fields"}
+      - if @product.is_flash_sale? || @product.is_hotel_listing?
+        .small The availability for this particular variant. These are the actual dates between which bookings are available.
+        = f.label :available_om
+        = f.date_select :available_on
+
+        
+        
+      

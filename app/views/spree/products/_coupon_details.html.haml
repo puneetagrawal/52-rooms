@@ -1,0 +1,18 @@
+- @product =  coupon
+#hotel_title
+  .name
+    %h1= @product.name
+  .prices
+    .small Rates from
+    .sale_price
+      = number_to_indian_currency @product.starting_price rescue ' '
+      %span.small / Per Coupon
+#slider
+  = image_tag @product.images[0].attachment.url(:slider), :class => "slider_image" rescue ''
+  .sale_badge
+    Sale 25% off
+  #slider_nav
+    - @product.images.each do |img|
+      %a{:href=>"#"}
+        = image_tag img.attachment.url :slider_thumb
+= render :partial => "cart_form"

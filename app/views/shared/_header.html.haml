@@ -1,0 +1,39 @@
+// HEADER
+#header
+  #header_ribbon
+    .fwc.clearfix
+      #user_cp.fr
+        %span.icon.signin
+        - unless @current_user
+          %a{:href=>"/user/sign_up"} Signup
+          \ &nbsp; / &nbsp;
+          %a{:href=>"/user/sign_in"} Login
+        - else
+          = link_to "#{@current_user.email}", "/account"
+          |
+          = link_to "logout", destroy_user_session_path
+      .fr
+        &nbsp;&nbsp;
+        %a{:href=>"#"}
+          %span.icon.email
+      .fr
+        %span.icon.phone
+        Tel: 1.877.888.0680
+
+  #main_header
+    .fwc
+      %a#logo{:href=>"/"}
+        = image_tag "logo.png"
+      %ol#nav
+        %li{:id=>"nav_sales", :class=>"#{@current == 'products' ? 'active' : ''}"}
+          %a{:href=>"/sales"} Sales
+        %li{:id=>"nav_destinations", :class => "#{@current == 'destinations' ? 'active' : ''}"}
+          %a{:href=> destinations_path} Destinations
+        - ['Tours', 'Inspiration'].each_with_index do |el, i|
+          %li{:id=>"nav_#{el.downcase}"}
+            %a{:href=>"/#{el.downcase}"}= el
+      #search
+        = form_tag products_path, :method => :get do
+          = text_field_tag "search", params[:keywords], :placeholder=>"Enter destination / hotel name", :name => "keywords"
+
+      

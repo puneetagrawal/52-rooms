@@ -1,0 +1,55 @@
+%h3= "This is a #{@product.product_type}"
+%div{"data-hook" => "admin_product_form_fields"}
+  .clearfix
+    .left{"data-hook" => "admin_product_form_left"}
+      = f.inputs :name => "Property Data" do
+        = f.input :name
+        = f.input :featured, :hint => "Show this on the homepage in the slider?"
+        = f.input :type_of_hotel, :hint => "PLEASE PROVIDE OPTIONS HERE SO THAT THIS FIELD IS CONVERTED TO A DROPDOWN"
+        = f.input :type_of_holiday, :hint => "PLEASE PROVIDE OPTIONS HERE SO THAT THIS FIELD IS CONVERTED TO A DROPDOWN"
+        = f.input :city
+        = f.input :state
+        = f.input :pin_code
+        = f.input :country
+        = f.input :supplier_name
+        = f.input :property_type, :as => :select, :collection => Spree::Product::PROPERTY_TYPES
+        = f.input :star_rating, :input_html => {:value => 5}
+        = f.input :street_address
+        = f.input :amenities, :as => :check_boxes, :collection => Spree::Product::AMENITIES, :input_html => { :name => "product[amenities][]" }
+        = f.input :checkin_time
+        = f.input :checkout_time
+      = f.inputs :name => "Rich Content" do
+        = f.input :description, :hint=> "This is a brief 2-3 line description to be shown in non-html summaries.", :as=>"text"
+        - [:overview, :location_and_attractions, :rooms, :reviews, :amenities_html].each do |field|
+          = f.input field, :input_html=>{:class=>"wysiwyg"}
+      = f.inputs :name => "location Fields" do
+        %h6
+          you can use 
+          %a{:href=>"http://www.findlatitudeandlongitude.com/", :target=>"blank"}a service like this one
+          to find on the lat and long positions
+        %br
+        = f.input :latitude, :input_html => {:class=>"ilb"}
+        = f.input :longitude, :input_html => {:class=>"ilb"}
+        = f.input :zoom_level, :input_html => {:class=>"ilb"}
+    .right
+      = f.inputs :name => "Inventory Details" do
+        = f.semantic_fields_for :f2r_hotel_inventory_items do |inv_f|
+          = render :partial => 'f2r_hotel_inventory_item_fields', :locals => {:f => inv_f }
+        = link_to_add_association "add", f, :f2r_hotel_inventory_items
+      = f.input :sale_percent
+      = f.input :available_on, :hint => "It will go live for sale on this date on the site."
+      - if @product.is_flash_sale?
+        %h3 Flash sale specific fields
+        - @product.flash_start_on = @product.flash_start_on.blank? ? Time.now : @product.flash_start_on
+        = f.input :flash_start_on
+        = f.input :flash_close_on
+      - else
+      = f.inputs :name => "SEO related fields" do
+        - [:meta_keywords, :meta_description].each do |field|
+          = f.input field
+        = f.input :permalink, :hint => "Changing this might have unexpected consequences"
+
+    
+  -# %div{"data-hook" => "admin_product_form_additional_fields"}
+  -#   - Spree::Variant.additional_fields.select { |af| af[:only].nil? || af[:only].include?(:product) }.each do |field|
+  -#     = render :partial => 'spree/admin/shared/additional_field', :locals => { :field => field, :f => f }

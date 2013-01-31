@@ -1,0 +1,23 @@
+:javascript
+  $( ".al_datepicker" ).live('focus',function(){
+  $(this).datepicker({ 
+   dateFormat: "yy-mm-dd",
+   minDate:0
+  });
+  })
+  $( ".ah_datepicker" ).live('focus',function(){
+  $(this).datepicker({ 
+   dateFormat: "yy-mm-dd",
+   minDate:0
+  });
+  })
+= render :partial => 'spree/admin/shared/product_sub_menu'
+= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Product Details' }
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @product }
+= semantic_form_for [:admin, @product], :method => :put, :html => { :multipart => true } do |f|
+  - unless @product.is_coupon?
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'
+  - else
+    = render :partial => 'coupon_form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'

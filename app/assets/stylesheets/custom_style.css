@@ -1,0 +1,55 @@
+.Highlighted a{
+   background-color : Green !important;
+   background-image :none !important;
+   color: White !important;
+   font-weight:bold !important;
+   font-size: 11pt;
+}
+.check_in a{
+	background-color : Red !important;
+   background-image :none !important;
+   color: White !important;
+   font-weight:bold !important;
+   font-size: 11pt;
+}
+
+.wrapper {
+   height: 600px;
+}
+
+#jrange input {
+   width: 200px;
+}
+
+#jrange div {
+   font-size: 9pt;
+}
+
+.date-range-selected > .ui-state-active,
+.date-range-selected > .ui-state-default {
+   background: none;
+   background-color: lightsteelblue;
+}
+.unavailable span{
+	background-color : #666666 !important;
+	background-image :none !important;
+   color: White !important;
+   font-weight:bold !important;
+   font-size: 11pt;
+}
+.ui-datepicker {font-size: 11pt !important;}
+/*.changecolor{ background-color: blue !important;}*/
+/*.ui-datepicker-current-day .ui-state-active { background: #000000 !important; }*/
+/*.ui-datepicker-today a{ background-color: blue !important;}*/
+
+/*.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{ background: none repeat scroll 0 0 salmon !important;}*/
+
+#map_canvas { height: 100% }
+.check_in_date span{
+   background-color : #000000  !important;
+   background-image :none !important;
+   color: White !important;
+   font-weight:bold !important;
+   font-size: 11pt;
+}
+.check_in_date{opacity:1 !important;}

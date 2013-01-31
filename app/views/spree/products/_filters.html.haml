@@ -1,0 +1,67 @@
+- params_arr = [:nm, :ct, :cn]
+#filters
+  %h2 Modify your search
+  %br
+  - if @search.facet(:product_type)
+    %h3 Show me only
+    - @search.facet(:product_type).rows.each do |c|
+      - unless params[:cn]
+        = link_to_add_filter(c.value, c.count, {:pt=>c.value}).html_safe
+      - else
+        = link_to_remove_filter("#{c.value}", {:pt=>c.value}).html_safe
+        
+    %br
+  %h3 Price Range
+  %form
+    .field.price_range
+      Price from
+      %input#price_min{:type=>"text", :name=>"pl", :placeholder=>"from", :value=>params[:pl]}
+      to
+      %input#price_max{:type=>"text", :name=>"ph", :placeholder=>"to", :value=>params[:ph]}
+      #price_slider
+      %input.btn{:type => "submit", :value=>"Go"}
+  %h3 Date Range
+  %form
+    .field.date_range
+      %label Checkin
+      %input{:type => "text", :name=>"al", :placeholder=>"Vacation start date", :value=>params[:al], :id=>"al_datepicker"}
+      %label Checkout
+      %input{ :type => "text",:name=>"ah", :placeholder=>"Vacation end date", :value=>params[:ah], :id=>"ah_datepicker"}
+      %br
+      %input.btn{:type => "submit", :value=>"Go"}
+  - if @search.facet(:country)
+    %h3 Countries
+    - @search.facet(:country).rows.each do |c|
+      - unless params[:cn]
+        = link_to_add_filter(c.value, c.count, {:cn=>c.value}).html_safe
+      - else
+        = link_to_remove_filter("#{c.value}", {:cn=>c.value}).html_safe
+        
+    %br
+  - if @search.facet(:star_rating)
+    %h3 Star Ratings
+    - @search.facet(:star_rating).rows.each do |c|
+      - unless params[:st]
+        = link_to_add_filter(c.value, c.count, {:st=>c.value}).html_safe
+      - else
+        = link_to_remove_filter("#{c.value}", {:st=>c.value}).html_safe
+
+    %br
+  - if @search.facet(:amenities)
+    %h3 Amenities
+    - @search.facet(:amenities).rows.each do |c|
+      - unless params[:am]
+        = link_to_add_filter(c.value, c.count, {:am=>c.value}).html_safe
+      - else
+        = link_to_remove_filter("#{c.value}", {:am=>c.value}).html_safe
+
+  
+    %br
+  - if @search.facet(:city)
+    %h3 Cities
+    - @search.facet(:city).rows.each do |c|
+      - unless params[:ct]
+        = link_to_add_filter(c.value, c.count, {:ct=>c.value}).html_safe
+      - else
+        = link_to_remove_filter("#{c.value}", {:ct=>c.value}).html_safe
+

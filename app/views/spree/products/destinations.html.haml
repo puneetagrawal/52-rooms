@@ -1,0 +1,35 @@
+-# %div{"data-hook" => "homepage_sidebar_navigation"}
+-#   - if "products" == @current_controller && @taxon
+-#     = render :partial => 'spree/shared/filters'
+-#   - else
+-#     = render :partial => 'spree/shared/taxonomies'
+= render :partial => "filters"
+#search_results{"data-hook" => "homepage_products"}
+  -# - if params[:keywords].present? || params[:cn].present? || params[:ct].present? || params[:am].present?
+  -#   %h2.search_title Search Results
+  -#   #sorts
+  -#     %ul
+  -#       %span Sort by
+  -#       - ["Relevance", "Name", "Price"].each do |x|
+  -#         %li
+  -#           = link_to_sort x
+  -#   .pagi
+  -#     = paginate @search.hits
+  -#   %br
+
+  -#   - if @products.empty?
+  -#     %h6.search-results-title= t(:no_products_found)
+  -#   - else
+  -#     = render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon }
+  -# - else
+  -#   = render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon }
+  -# %br
+  -# .pagi
+#search_results
+  - @dests.groups.each do |grp|
+    %h1
+      = grp.value.titleize 
+      %span.small (more)
+    = render :partial => 'spree/shared/products', :locals => { :grppd => grp.results, :taxon => @taxon }
+
+

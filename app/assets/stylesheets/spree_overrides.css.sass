@@ -1,0 +1,30 @@
+@import compass
+@import zen
+@import base
+
+#product-variants
+  color: #1e1e1e
+  h6 
+    +adjust-font-size-to(12px)
+    font-weight: bold
+  label
+    font-size: 12px
+    &:hover
+      background-color: $hi-clr
+    
+  input[type="radio"]
+    height: 2em
+    display: inline-block
+    width: 30px
+    vertical-align: middle
+
+span.price, #checkout-summary table tr[data-hook="item_total"] td:last-child strong, #checkout-summary table #summary-order-total, #order_details td.price span, #order_details td.total span, #order_summary td.price span, #order_summary td.total span, table#cart-detail tbody#line_items tr td[data-hook="cart_item_price"], table#cart-detail tbody#line_items tr td[data-hook="cart_item_total"], div[data-hook="inside_cart_form"] #subtotal span.order-total
+  color: $hi-clr
+
+
+.datepickerSelected.available
+  background: $hi-clr !important
+  cursor: pointer !important
+  font-weight: bold !important
+.datepickerSelected.available:hover
+  color: #fff !important

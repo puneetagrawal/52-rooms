@@ -1,0 +1,13 @@
+.nested-fields
+  = f.input :room_type, :as => :select, :collection => Spree::OptionType.room_type_option_values
+  .small Prices per person per night
+  = f.input :price, :as => :number
+  = f.input :cost_price, :as => :number
+  .small Rooms Available Per Night
+  = f.input :count_on_hand, :as => :number
+  .small Availability Range
+  = f.input  :available_from, :as => :string, :input_html => { :type => "date"  }
+  = f.input  :available_to, :as => :string, :input_html => { :type => "date"  } 
+  .small
+ 
+  = link_to_remove_association "remove", f

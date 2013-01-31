@@ -1,0 +1,30 @@
+
+.columns.alpha.six{"data-hook" => "billing_fieldset_wrapper"}
+  %fieldset#billing{"data-hook" => ""}
+    = form.semantic_fields_for :bill_address do |bill_form|
+      %legend= "Your details"
+      -# = render :partial => 'addressform', :locals => {:form => bill_form, :address_type => 'billing', :address => @order.bill_address}
+      -# = render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address }
+      = bill_form.inputs :firstname, :lastname, :address1, :address2, :city, :state, :zipcode, :phone
+.columns.omega.six{"data-hook" => "shipping_fieldset_wrapper", :style=> "display: none"}
+  %fieldset#shipping{"data-hook" => ""}
+    = form.fields_for :ship_address do |ship_form|
+      %legend{:align => "center"}= t(:shipping_address)
+      %p.field.checkbox{"data-hook" => "use_billing"}
+        = check_box_tag 'order[use_billing]', '1', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+        = label_tag :order_use_billing, t(:use_billing_address), :id => 'use_billing'
+      -# = render :partial => 'spree/address/form', :locals => {:form => ship_form, :address_type => 'shipping', :address => @order.ship_address}
+        = ship_form.inputs
+%hr.clear/
+.form-buttons{"data-hook" => "buttons"}
+  = submit_tag t(:save_and_continue), :class => 'continue button primary'
+  
+-# = semantic_fields_for :billing_address do |bill_form|
+-#   = bill_form.inputs :name => "Billing Address" do
+-#     = bill_form.input :firstname
+-#     = bill_form.input :lastname
+-#     = bill_form.input :address1
+-#     = bill_form.input :address2
+-#     = bill_form.input :city
+-#     = bill_form.input :country_id, :as => :hidden, :input_html => {:value => available_countries.last.id, :diasbled => "disabled"}
+-#   = bill_form.actions

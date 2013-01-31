@@ -1,0 +1,37 @@
+-room_type_all = [1, 2, 3]
+var append_html=""
+var room_qty=$("#order_qty").val();
+$("#number_days").val("#{@check_date}")
+$("#room_type").children().remove()
+
+-@room_data_array.each_with_index do |data,index|   
+  -if (index==0) 
+    -checked="checked='true'"
+    $("#show_subtotal").text("$"+parseFloat("#{data[:price]}"*room_qty).toFixed(2)) 
+    $("#order_room_type_id").attr('value',"#{data[:room_type_id]}")
+    if(room_qty<="#{data[:available]}"){ 
+    $('#bookbtn').attr('disabled', false);}  
+  -else 
+    -checked=''
+  -room_type_all.delete_if {|v| v == data[:room_type_id]}
+  -price_room=data[:price]/@check_date
+  -available=data[:available]                   
+  -# $("#room_available").val("#{available}")
+
+  -price_room=number_with_precision(price_room.to_f, :precision => 2)
+  append_html += "<div><input type='radio' value= #{data[:room_type_id]} name='room_type' id='room_type_#{data[:room_id]}' #{checked}>"+
+  "<span class='small'> #{data[:room_name]}</span> <span class='small'>$#{price_room}</span>"+
+  "<input id='hidden_price_#{data[:room_id]}' type='hidden' value='#{price_room}' name='product_id'>"+ "<input id='hidden_avlbl_#{data[:room_id]}' type='hidden' value='#{available}' name='product_id'></div>"
+
+-room_type_all.each do |data| 
+  -if data==1
+    append_html += "<input type='radio' value='' disabled='' ><span class='small'>Honeymoon suite</span><span class='small' style='margin-left:10px'>Not available</span><br/>"
+  -elsif data==2
+    append_html += "<input type='radio' value='' disabled='' ><span class='small'>Single Bed</span><span class='small'style='margin-left:10px'>Not available</span><br/>"
+  -elsif data==3
+    append_html += "<input type='radio' value='' disabled='' ><span class='small'>Double Bed</span><span class='small'style='margin-left:10px'>Not available</span><br/>"
+        
+$("#room_type").append(append_html) 
+$("#room_type").show()
+$("#order_check_in_date").attr('value',$("#check_in_hotel").text())
+$("#order_check_out_date").attr('value',$("#check_out_hotel").text())     

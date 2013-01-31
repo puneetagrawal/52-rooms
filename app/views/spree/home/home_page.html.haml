@@ -1,0 +1,70 @@
+#featured_slider
+  = image_tag @featured.first.images.first.attachment.url(:featured), :class=>"main_featured_image"   rescue ''
+  %ul#controls
+    - @featured.each do |f|
+      %li
+        %a.featured_nav_control{:href=>"#", :rel => "#{ f.images.first.attachment.url(:featured) unless f.images.blank?}", :data => {:country => f.country.upcase, :city => f.city.upcase, :name => f.name.titleize, :sale => f.sale_percent, :time =>("0" + (rand(9)+1).to_s)}, :url=> product_url(f)}= f.city.upcase
+  - p = @featured[0]
+  
+  %a.info{:href=>(product_url(p))}
+    .big_discount 
+      = p.sale_percent rescue ''
+      = "% off"
+    .hotel_name
+      .name= p.name rescue ''
+      .location= "// " + p.city.upcase + ", " + p.country.upcase rescue ''      
+      .timer
+        .sale= "Sale "
+        .time= "0" + (rand(9)+1).to_s
+        .left
+          DAYS
+          %br
+          LEFT
+
+  #search_form
+    .heading Reserve a Great Hotel
+    = form_tag products_url, :method => "get" do
+      .field
+        %input{:type => "text", :placeholder => "Enter destination / hotel name", :name => "keywords"}
+      .field.small
+        Optional
+      .field        
+        %input{:type => "text", :placeholder => "Enter Arriving Date", :name=>"al", :id => "al_datepicker"} 
+      .field        
+        %input{:type => "text", :placeholder => "Enter Leaving Date", :name=>"ah", :id => "ah_datepicker"}
+      -# .field.split2
+      -#   %input{:type => "text", :placeholder => "Adults"}
+      -#   %input{:type => "text", :placeholder => "children"}
+      .actions.field
+        %input{:type=>"submit", :name=>"Search", :value=>"Search"}
+      .field
+        %a.clear{:href=>"#"} Clear your dates
+
+
+#products_listing
+  %h2 On Sale Today
+  - @flash_sales.each do |f|
+    %a.product_row{:href=>product_path(f)}
+      .sale_percent
+        = f.sale_percent.to_s + " %"
+        %span.small off
+      
+      %h3
+        %span.sale_badge
+          %span.big Sale
+          %span.time= "#{distance_of_time_in_words_to_now(f.flash_close_on)}" if f.is_flash_sale? 
+          %span.small left
+      = image_tag  f.images[0].attachment.url(:row) rescue ''
+      .details
+        %h3.name= f.name.titleize
+        .location
+          \//
+          = f.city.upcase + ", " + f.country.upcase
+        
+    
+  .coupons_container
+    %h2= "Vouchers"
+    - @coupons.each do |c|
+      = render :partial => 'coupon', :locals => { :coupon => c }
+ 
+  

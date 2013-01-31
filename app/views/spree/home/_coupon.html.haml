@@ -1,0 +1,7 @@
+%a.coupon_box{:href => product_url(coupon)}
+  = image_tag coupon.images.first.attachment.url(:product) rescue ' no image '
+  %h4.coupon_title= coupon.name.titleize.truncate(30)
+  .city_name
+    = "// "
+    = coupon.city.upcase + ', ' rescue 'city ,'.upcase
+    = coupon.country.upcase rescue 'country'.upcase

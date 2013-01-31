@@ -1,0 +1,103 @@
+@import compass
+
+body 
+  background: #222
+
+fieldset ol
+  list-style: none
+  margin-left: 0
+  padding-left: 0
+  color: #444
+  font-size: 10px
+
+legend
+  font-size: 18px
+  color: #888
+  
+label
+  display: block
+
+.input.required
+  color: #800
+  font-weight: normal
+  abbr
+    border-bottom: 0
+    float: left
+    margin-left: -5px
+  input, textarea
+    border-color: #a00
+.input.number
+  display: inline-block
+  margin-right: 5px
+
+.input 
+  margin-bottom: 1em
+  input[type="text"], textarea, input, select
+    +transition(.1s)
+    height: 2em
+    font-size: 14px
+    color: #444
+    padding: 0.25em
+    width: 80%
+    &:focus 
+      background: #444
+      color: #fafafa
+  select:focus
+    background-color: #acd
+    color: #444
+  input[type="number"]
+    width: 100px
+  textarea
+    height: 100px
+    &:focus
+      height: 300px
+
+  .inline-hints
+    color: #888
+
+.fragment
+  display: inline-block
+  margin-right: 10px
+  select
+    min-width: 50px
+
+.choice
+  display: inline-block
+  background: #eee
+  padding: 0 5px
+  text-align: center
+  margin-right: 2px
+  +transition(.1s)
+  margin-bottom: 0.5em
+  label
+    display: block
+    min-width: 100px
+  input[type="checkbox"]
+    display: block
+  &:hover
+    background: #efe
+
+.ilb
+  display: inline-block
+
+.input textarea.wysiwyg
+  width: 95%
+
+.left, .right
+  border: 0
+fieldset
+  border: 0
+  padding: 0
+  padding-left: 1em
+
+
+.nested-fields
+  input[type="date"]
+    display: inline-block
+    width: 40%
+  background: rgba(100, 100, 200, 0.1)
+  padding: 0.5em
+  border-bottom: #444
+  +transition(0.1s)
+  &:hover
+    background: rgba(100, 100, 200, 0.3)

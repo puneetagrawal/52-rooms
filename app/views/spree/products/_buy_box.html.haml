@@ -1,0 +1,1093 @@
+-# /*
+-#   Welcome to Compass.
+-#   In this file you should write your main styles. (or centralize your imports)
+-#   Import this file using the following HTML or equivalent:
+-#   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+-# // Loading the necessities and the defaults
+-# @import compass
+-# +global-reset
+-# @import base
+-# @import zen
+-# +establish-baseline
+
+-# .fixed-width-container, .fwc
+-#   width: 960px
+-#   margin: 0 auto
+-#   padding: 0.5em 0
+    
+-# #user_cp
+-#   text-align: right
+-#   margin-left: 5px
+-#   a
+-#     color: #fafafa
+-# #header_ribbon
+-#   +adjust-font-size-to(13px)
+-#   width: 100%
+-#   background-color: #1e1e1e
+-#   display: block
+-#   color: #fafafa
+-#   .icon
+-#     margin-right: 10px
+-# #main_header
+-#   background: #eee
+-#   width: 100%
+-#   display: block
+-#   +background-image(linear-gradient(#fafafa, #fff, #eaeaea))
+-#   +box-shadow(0 2px 10px 2px rgba(0, 0, 0 ,0.25))
+-#   height: 62px
+-#   padding-top: 0
+-#   padding-bottom: 4px
+-#   .fwc
+-#     position: relative
+-#     padding: 0
+    
+-# #logo
+-#   display: inline-block
+-#   vertical-align: middle
+-#   &:hover
+-#     text-decoration: none
+
+-# #search
+-#   position: absolute
+-#   right: 0
+-#   bottom: 0.75em
+-#   input[type="text"]
+-#     +adjust-font-size-to(14px)
+-#     padding: 0.25em 1em
+-#     width: 200px
+    
+-# #nav
+-#   display: inline-block
+-#   margin-left: 10px
+-#   li
+-#     display: inline-block
+-#     cursor: pointer
+-#     vertical-align: middle
+-#     margin-right: -2px
+-#     a
+-#       +adjust-font-size-to(20px)
+-#       color: #888
+-#       padding: 3px 15px
+-#       text-decoration: none
+-#       line-height: 3em
+-#       height: 60px
+-#       display: block
+-#       border-right: 1px solid transparent
+-#       border-left: 1px solid transparent
+-#       cursor: pointer
+-#       +transition(0.1s)
+-#   li.active, li:hover
+-#     cursor: pointer
+-#     a
+-#       cursor: pointer
+-#       background: #eee
+-#       border-right: 1px solid #fafafa
+-#       border-left: 1px solid #fafafa
+-#       color: #444
+-#       cursor: default
+-#       +box-shadow(inset -1px 0 2px rgba(0, 0, 0, 0.1), inset 1px 0 2px rgba(0, 0, 0, 0.1))
+-#   li.active:hover 
+-#     cursor: default
+-#     a
+-#       cursor: default
+
+
+-# #main_container
+-#   +zen-grid-container
+-#   height: auto
+-#   display: block
+-#   margin: auto
+-#   margin-top: 2em
+-#   width: 960px
+-#   #hotel_title, #slider, #content
+-#     +zen-clear
+-#   .left_col
+-#     +zen-grid-item(3.5,1)
+-#     padding-left: 0
+-#   .right_col
+-#     +zen-grid-item(8.25, 4.75)
+-#     background: #fff
+-# #search_gizmo
+-#   background:  $hi-clr
+-#   padding: 1em 0
+-#   input[type="text"]
+-#     border: 2px solid #666
+-#     border-bottom: 1px solid #fff
+-#     border-right: 1px solid #fff
+-#   input
+-#     display: block
+-#     height: 1.5em
+-#     margin: auto
+-#     width: 220px
+-#     margin-bottom: 0.5em
+-#     padding: 0 0.25em 
+-#     font-size: 1.15em
+-#   input[type="submit"]
+-#     width: 230px
+-#     padding: 0.5em 0
+-#     color: #fff
+-#     font-size: 18px
+-#     height: 2.25em
+-#     +ts-dark
+-# .btn
+-#   background-color: $hi-clr-var
+-#   color: white
+-#   border: 1px solid #ccc
+-#   border-color: rgba(255, 255, 255, 0.5)
+-#   +background-image(linear-gradient(rgba(255, 255, 255, 0.35), rgba(0, 0, 0, 0)))
+-#   border-bottom: 1px solid #666
+-#   border-right: 1px solid #666
+-#   cursor: pointer
+-#   +f2r-box
+-#   padding: 0.25em 1em
+-#   +adjust-font-size-to(16px)
+-#   &:hover
+-#     +background-image(linear-gradient(rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.05)))
+-#   &:active
+-#     +background-image(linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.35)))
+-# #sorts
+-#   border-top: 1px dotted #ccc
+-#   border-bottom: 1px dotted #ccc
+-#   display: block
+-#   margin: 0.75em 0
+-#   span
+-#     margin-right: 20px
+-#   li
+-#     display: inline-block
+-#     a
+-#       padding: 0.75em
+-#       display: inline-block
+-#       &:hover
+-#     a.active
+-#       background: #eee
+-#       +box-shadow(inset 0 0 3px 1px rgba(0, 0, 0, 0.1))
+-#       color: #444
+
+-# .pagination
+-#   text-align: right
+-#   .next a
+-#     margin-left: 10px
+-#   .prev a
+-#     margin-right: 10px
+-#   .page
+-#     display: inline-block
+-#     a
+-#       color: #888
+-#       padding: 0.25em 1em
+-#   .current
+-#     color: $hi-clr
+-#   .last, .first
+-#     display: none
+  
+-# .search_result
+-#   background: #f8f8f8
+-#   margin: 1.5em 0
+-#   height: 180px
+-#   &:first-child
+-#     margin-top: 0.5em
+-#   .image, .details
+-#     display: inline-block
+-#     vertical-align: top
+-#   .image
+-#     margin-right: 10px
+-#     position: relative
+-#     .sale_badge
+-#       background: $hi-clr
+-#       +f2r-box
+-#       display: block
+-#       position: absolute
+-#       right: 0.5em
+-#       top: -0.5em
+-#       z-index: 10
+-#       text-align: center
+-#       padding: 0 5px 0 5px 
+-#       color: #fff
+-#       +ts-dark
+-#       font-size: 12px
+-#       letter-spacing: -1px
+-#       .days
+-#         +spl-font
+-#         display: block
+-#         font-size: 2.25em
+-#         letter-spacing: 0
+-#         .small
+-#           margin-bottom: -0.25em
+-#           font-size: 16px
+          
+-#   .box_image
+-#     height: 180px
+
+-#   .name
+-#     +adjust-font-size-to(18px)
+-#     margin-top: 0.75em
+-#     a
+-#       color: #444
+-#   .location, .rating
+-#     +adjust-font-size-to(14px)
+-#     margin-top: -0.25em
+-#   .details
+-#     width: 295px
+-#     margin-top: -0.5em
+-#   .summary
+-#     +adjust-font-size-to(12px)
+-#     line-height: 1em
+-#     padding-bottom: 0.5em
+-#     border-bottom: 1px dotted #ccc
+
+
+-# #filters
+-#   background: #fff
+-#   margin-top: 0
+-#   padding-top: 1em
+-# .filter
+-#   border-bottom: 1px dotted #ccc
+-#   padding: 0 
+-#   margin: 0 10px
+-#   margin-bottom: 0.75em
+-#   padding-bottom: 0.75em
+-#   h3
+-#     margin-bottom: 0.5em
+-# .with_checkbox
+-#   label
+-#     +adjust-font-size-to(14px)
+-#     color: #888
+-#   label:hover
+-#     color: $hi-clr
+    
+-# .rating
+-#   color: #888
+-#   span
+-#     letter-spacing: -3px
+-#   .full
+-#     color: $hi-clr
+
+-# .prices
+-#   strike
+-#     +adjust-font-size-to(18px)
+-#     text-decoration: line-through
+-#     margin-right: 0.5em
+-#   .retail_price
+-#     +adjust-font-size-to(22px)
+-#     color: $hi-clr
+-# .book
+-#   text-align: right
+-#   +adjust-font-size-to(14px)
+-#   font-weight: bold
+-# .fine_print
+-#   font-weight: normal
+-#   color: #777
+-#   vertical-align: middle
+-#   +adjust-font-size-to(10px)
+
+
+
+
+-# #hotel_title
+-#   +zen-clear
+-#   padding: 5px 0
+-#   padding-left: 0
+-#   padding-bottom: 15px
+-#   background: transparent
+-#   border-top: 1px dotted #444
+-#   border-bottom: 1px dotted #444
+-#   margin-top: 0.5
+-#   margin-bottom: 2em
+-#   h1
+-#     color: #444
+-#     +adjust-font-size-to(38px)
+-#     display: inline-block
+-#   .address
+-#     color: $hi-clr
+-#     +adjust-font-size-to(12px)
+-#     text-transform: uppercase
+-#   .name
+-#     width: 700px
+-#     padding-right: 15px
+-#     display: inline-block
+-#   .prices
+-#     width: 200px
+-#     display: inline-block
+-#     vertical-align: top
+-#     .small
+-#       +body-font
+-#       color: #888
+-#     .sale_price
+-#       font-size: 26px
+-#       color: $hi-clr
+-#       margin-bottom: 0
+-#       .small
+-#         font-size: 12px
+-#         vertical-align: middle
+-#     .striked_price
+-#       margin-top: -0.5em
+      
+
+-# #slider
+-#   +zen-clear
+-#   margin-top: 1em
+-#   position: relative
+-#   height: 500px
+-#   width: 960px
+-#   background-image: url('loader_large.gif')
+-#   background-position: center center
+-#   background-repeat: no-repeat
+-#   .sale_badge
+-#     position: absolute
+-#     right: 0.25em
+-#     top: -0.25em
+-#     z-index: 10
+-#     background-color: $hi-clr
+-#     font-size: 2em
+-#     padding: 0.5em 
+-#     +spl-font
+-#     color: #fff
+-#     +ts-dark-down
+-#     border: 0
+-#     +box-shadow(none)
+    
+-# #slider_nav
+-#   position: absolute
+-#   bottom: 0
+-#   text-align: center
+-#   background: #222
+-#   background: rgba(0, 0, 0, 0.8)
+-#   z-index: 10
+-#   width: 100%
+-#   +opacity(0.9)
+-#   padding
+-#     top: 5px
+-#     bottom: 5px
+-#   a
+-#     display: inline-block
+-#     border: 5px solid transparent
+-#     +opacity(0.75)
+-#     +transition(0.1s)
+-#     &:hover
+-#       +opacity(1)
+-#   a.active
+-#     border-color: $hi-clr
+-#     opacity: 1
+    
+
+-# .sale_badge
+-#   background: $hi-clr
+-#   display: block
+-#   position: absolute
+-#   z-index: 10
+-#   text-align: center
+-#   color: #fff
+-#   +ts-dark
+-#   +box-shadow(inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(0, 0, 0, 0.5))
+-#   +background-image(linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)))
+-# #content
+-#   margin-top: 2em
+-#   +zen-clear
+-#   .left_col, .right_col
+-#     background: #fff
+-#     padding-top: 0.5em
+-#     padding-bottom: 0.5em
+-#   .right_col
+-#     +zen-grid-item(8, 1)
+-#     background: #fafafa
+-#   .left_col
+-#     +zen-grid-item(3.5, 9.5)
+
+-# .tab_nav
+-#   display: block
+-#   +clearfix
+-#   margin: 1em 0
+-#   background: #222
+-#   color: #fafafa
+-#   li
+-#     float: left
+-#   .tab
+-#     padding: 0.25em 0.5em
+-#     display: inline-block
+-#     margin-right: 3px
+-#     background: transparent
+-#     cursor: pointer
+-#     &:hover
+-#       background: darken($hi-clr-var, 20)
+-#       text-decoration: none
+-#   .tab.active
+-#     cursor: default
+-#     background: $hi-clr
+-#     color: #f0f0f0
+-#     border: 1px solid #ccc
+-#     +box-shadow(none)
+-#     border-bottom: 0
+-#     color: #f0f0f0
+
+-# #content
+-#   color: #888
+-#   h2
+-#     font-size: 20px
+-#     padding: 0.75em 0
+-#     border-bottom: 1px dotted #ccc
+-#   h3
+-#     color: #333
+-#     padding: 0.75em 0
+-#   .dotted_line
+-#     border-bottom: 1px dotted #ccc
+-#     width: 100%
+-#     height: 1px
+-#     padding: 1em 0
+-# #content p
+-#   +adjust-font-size-to(14px)
+
+
+-# .amenities_list, .bullet_list
+-#   list-style-type: square
+-# .amenities_list
+-#   +adjust-font-size-to(12px)
+-#   li
+-#     display: inline-block
+-#     width: 32%
+
+-# a.more
+-#   float: right
+-#   +adjust-font-size-to(14px)
+-#   +clearfix
+
+
+-# ul.tabcontent
+-#   +adjust-font-size-to(14px)
+-#   margin: 0
+-#   padding: 0
+-#   li
+-#     list-style: none
+
+
+
+-# .clearfix
+-#   +clearfix
+-# span.icon
+-#   display: inline-block
+-#   height: 24px
+-#   width: 24px
+-#   vertical-align: top
+-#   background
+-#     repeat: no-repeat
+-#     position: center center
+-#     size: cover
+
+-# span.icon.phone
+-#   background-image: url('icons/icon_phone.png')
+-# span.icon.signin
+-#   background-image: url('icons/icon_signin.png')
+-# span.icon.email
+-#   background-image: url('icons/icon_email.png')
+  
+
+
+-# #footer
+-#   +zen-clear
+-#   background-color: #1e1e1e
+-#   margin-top: 5em
+-#   padding-top: 2em
+-#   padding-bottom: 2em
+-#   display: block
+-#   .fwc
+-#     position: relative
+-#   .col
+-#     width: 20%
+-#     display: inline-block
+-#     vertical-align: top
+-#     +adjust-font-size-to(18px)
+-#     font-size: 14px
+-#     a
+-#       display: block
+-#       color: #ccc
+-#       &:hover
+-#         text-decoration: none
+-#         color: #777
+      
+-#   h3
+-#     +adjust-font-size-to(20px)
+-#     margin-bottom: 1em
+    
+-#     +body-font
+-#     color: $hi-clr
+
+
+-# #scrolltop
+-#   +spl-font
+-#   height: 60px
+-#   +background-image(url('icons/icon_top white arrow .png'))
+-#   background-color: $hi-clr
+-#   background-repeat: no-repeat
+-#   background-position: center 5px
+-#   padding: 10px 5px
+-#   line-height: 100px
+-#   display: block
+-#   position: absolute
+-#   top: -3em
+-#   right: 30px
+-#   color: #fafafa
+-#   display: block
+-#   z-index: 10
+
+
+
+-# #featured_slider
+-#   height: 500px
+-#   width: 100%
+-#   display: block
+-#   position: relative
+-#   .info
+-#     width: 550px
+-#     right: 0
+-#     height: 200px
+-#     bottom: 85px
+-#     position: absolute
+-#     cursor: pointer
+-#     &:hover
+-#       text-decoration: none
+-#       .hotel_name:after
+-#         right: 0.1em
+-#     .timer
+-#       text-align: center
+-#       background: $hi-clr
+-#       +box-shadow(inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(0, 0, 0, 0.5))
+-#       +background-image(linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)))
+-#       position: absolute
+-#       right: 7em
+-#       bottom: -2em
+-#       padding: 0.25em
+-#       height: 7em
+-#       text-align: center
+-#       +spl-font
+-#       +ts-dark-down
+-#       .sale
+-#         +adjust-font-size-to(24px)
+-#         margin-top: -0.25em
+-#       .time
+-#         +transition(all, 1s, 'ease-in-out')
+-#         +adjust-font-size-to(48px)
+-#         margin-top: -.6em
+-#         font-weight: normal
+-#         +ts-dark
+-#       .left
+-#         text-align: left
+-#         +opacity(0.75)
+-#         font-weight: normal
+-#         +body-font
+-#         line-height: 1em
+-#         padding-left: 0.25em
+-#         margin-top: -0.75em
+-#         padding-bottom: 1.5em
+-#         font-size: 0.9em
+-#     .big_discount
+-#       +adjust-font-size-to(108px)
+-#       +ts-dark-down
+-#       color: #fafafa
+-#       +spl-font
+-#       +opacity(0.9)
+-#       +transition(all, 1s, 'ease-in-out')
+-#     .hotel_name
+-#       color: #fafafa
+-#       background: rgba(0, 0, 0, 0.65)
+-#       padding: 1em
+-#       padding-left: 1.5em
+-#       +transition(all, 1s, 'ease-in-out')
+-#       &:after
+-#         content: "¡ú"
+-#         font-size: 80px
+-#         color: #fafafa
+-#         font-weight: normal
+-#         position: absolute
+-#         right: 0.35em
+-#         +opacity(0.5)
+-#         top: 75%
+-#         +body-font
+-#       .name
+-#         +adjust-font-size-to(30px)
+-#         +ts-dark-down
+-#         color: #fafafa
+-#         +spl-font
+-#       .location
+-#         color: $hi-clr
+-#   #search_form
+-#     height: 380px
+-#     top: 25px
+-#     left: 25px
+-#     width: 300px
+-#     background: rgba($hi-clr, 0.8)
+-#     position: absolute
+-#     z-index: 1000
+-#     .heading
+-#       color: #fafafa
+-#       +ts-dark-down
+-#       +adjust-font-size-to(24px)
+-#       font-weight: bold
+-#       text-align: center
+-#       padding: 0.5em 0
+-#     .field
+-#       padding: 0.25em 1em
+-#       text-align: center
+-#       input
+-#         width: 95%
+-#         +adjust-font-size-to(14px)
+-#         padding: 0.25em 0.5em 
+-#         border: 2px solid #444
+-#         border: 2px solid rgba(0, 0, 0, 0.75)
+-#         border-right-color: #fafafa
+-#         border-bottom-color: #fafafa
+-#     .field.small
+-#       color: #fafafa
+-#       text-align: left
+-#       padding: 0
+-#       padding-left: 1.5em
+-#     .field.split2
+-#       input
+-#         width: 42%
+-#         display: inline-block
+-#     input[type="submit"]
+-#       background: #111
+-#       +spl-font
+-#       font-weight: bold
+-#       +ts-dark-down
+-#       width: 100%
+-#       color: #fafafa
+-#       border: 1px solid #000
+-#       +adjust-font-size-to(22px)
+-#       +background-image(linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)))
+-#       +box-shadow(inset 0 0 1px rgba(255, 255, 255, 0.5))
+-#       padding:  0
+-#     a.clear
+-#       float: left
+-#       color: #fafafa
+-#       +opacity(0.5)
+-#       &:hover
+-#         +opacity(1)
+-#         text-decoration: none
+-#   img
+-#     height: 500px
+-#     width: 100%
+
+-#   #controls
+-#     position: absolute
+-#     background: #111
+-#     display: block
+-#     text-align: center
+-#     width: 100%
+-#     left: 0
+-#     bottom: 0
+-#     li
+-#       display: inline-block
+-#       a
+-#         display: block
+-#         padding: 0.75em 1em
+-#         +spl-font
+-#         color: #fafafa
+-#         +transition(0.1s)
+-#         +body-font
+-#         +ts-dark
+-#         border: 1px solid transparent
+-#         &:hover, &.active
+-#           +arrow-box
+-#           color: #fafafa
+-#           text-decoration: none
+-#           background: $hi-clr
+-#           border: 1px solid rgba(255, 255, 255, 0.1)
+-#           border-right-color: rgba(0, 0, 0 ,0.5)
+-#           border-bottom-color: rgba(0, 0, 0 ,0.5)
+-#           +box-shadow(inset 1px 1px 2px rgba(255, 255, 255, 0.5), inset -1px -1px 2px rgba(0, 0, 0, 0.5))
+-#           +background-image(linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)))
+
+-# .heading
+-#   +spl-font
+
+-# #products_listing
+-#   margin: 2em 0
+-#   padding: 0.5em 1em 
+-#   background: #fafafa
+-#   h2
+-#     +adjust-font-size-to(24px)
+-#     border-bottom: 1px dotted #ccc
+-#     padding-top: 0
+-#     padding-bottom: 0.25em
+-#   .product_row
+-#     margin: 2em 0
+-#     position: relative
+-#     cursor: pointer
+-#     +transition(0.1s)
+-#     display: block
+-#     .sale_badge
+-#       +background-image(linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)))
+-#       +box-shadow(inset 1px 1px 1px rgba(255, 255, 255, 0.25), inset -1px -1px 1px rgba(0, 0, 0, 0.25))
+-#       padding: 0.25em
+-#       position: absolute
+-#       left: auto
+-#       right: 660px !important
+-#       top: -0.25em !important
+-#       width: 75px
+-#       +ts-dark-down
+-#       .small
+-#         font-size: 0.8em
+-#       .time
+-#         font-size: 1.25em
+-#       .big
+-#         font-size: 1.2em
+-#     .sale_percent
+-#       position: absolute
+-#       right: 1em
+-#       bottom: 1.25em
+-#       z-index: 1000
+-#       color: #fafafa
+-#       +ts-dark
+-#       +adjust-font-size-to(64px)
+-#       +spl-font
+-#       .small
+-#         font-size: 0.5em
+-#     .wide_img
+-#       width: 100%
+-#       height: 300px
+-#     .details
+-#       position: absolute
+-#       bottom: 0
+-#       left: 0
+-#       background: #eee
+-#       display: block
+-#       width: 100%
+-#       .name
+-#         padding: 10px 0
+-#         margin-left: 2.5%
+-#         margin-right: 2.5%
+-#         margin-right: 10%
+-#         color: #444
+-#         +adjust-font-size-to(20px)
+-#         padding-bottom: 0.25em
+-#         margin-bottom: 0.25em
+-#         border-bottom: 1px dotted #666
+-#         +transition(0.1s)
+-#         position: relative
+-#         &:after
+-#           position: absolute
+-#           top: 50%
+-#           font-size: 3em
+-#           font-weight: normal
+-#           right: -9.5%
+-#           color: $hi-clr
+-#           content: "¡ú"
+-#           +opacity(0.5)
+-#           +transition(0.1s)
+-#       .location
+-#         +transition(0.1s)
+-#         padding: 0 20px
+-#         padding-bottom: 0.5em
+-#         color: $hi-clr
+-#     &:hover
+-#       .details
+-#         background: #222
+-#       .name
+-#         color: #fafafa
+-#       .location
+-#         color: $hi-clr
+        
+        
+
+-# #filters
+-#   +zen-grid-item(3.5,1)
+-#   h2
+-#     margin-top: 0
+-#   h3
+-#     +adjust-font-size-to(14px)
+-#     font-weight: bold
+-#   .add_filter, .remove_filter
+-#     color: #444
+-#     +adjust-font-size-to(13px)
+-#     display: block
+-#     +transition(0.1s)
+-#     span.small
+-#       float: right
+-#       display: inline-block
+-#       margin-right: 0px
+-#       font-size: inherit
+-#       color: #ccc
+-#     &:hover
+-#       color: $hi-clr
+-#       text-decoration: none
+-#       .small
+-#         color: #444
+-#   .remove_filter
+-#     +transition(0.1s)
+-#     background: $hi-clr
+-#     color: #fafafa
+-#     padding: 0.5em
+-#     &:after
+-#       content: "remove"
+-#       float: right
+-#       +opacity(0.5)
+-#     &:hover
+-#       text-decoration: line-through
+-#       color: inherit
+-#       background: rgba($hi-clr, 0.5)
+-#       &:after
+-#         content: "click to remove"
+-#         +opacity(1)
+-# #search_results
+-#   +zen-grid-item(8,5)
+-#   background: #fafafa
+-#   .product_row
+-#     display: block
+-#     margin: 1em 0
+-#     background: #f0f0f0
+-#     position: relative
+-#     .sale_badge
+-#       background: $hi-clr
+-#       +f2r-box
+-#       display: block
+-#       position: absolute
+-#       right: 0.5em
+-#       left: auto
+-#       top: -0.5em
+-#       z-index: 10
+-#       text-align: center
+-#       padding: 0 5px 0 5px 
+-#       color: #fff
+-#       +ts-dark-down
+-#       width: 60px
+-#       left: auto
+-#       right: 360px !important
+-#       top: -0.25em !important
+-#       .small 
+-#         font-size: 1em
+-#         +spl-font
+-#       .amt 
+-#         +spl-font
+-#         font-size: 1.5em
+-#     .product_image
+-#       display: inline-block
+-#       vertical-align: top
+-#       img
+-#         height: 159px
+-#     .details
+-#       width: 330px
+-#       display: inline-block
+-#       padding-left: 20px
+-#       color: #444
+-#       font-size: 14px
+-#       line-height: 21px
+-#       h2
+-#         +adjust-font-size-to(24px)
+-#         width: 80%
+-#         padding-top: 0
+-#         margin-bottom: -0.5em
+-#         margin-top: 0
+-#         line-height: 1.25em
+-#         color: #444
+-#         margin-bottom: 0.5em
+-#       .overview
+-#         font-size: 12px
+-#         line-height: 18px
+-#       .location
+-#         color: $hi-clr
+      
+-# .star_rating
+-#   color: $hi-clr
+-#   .empty
+-#     color: #444
+
+
+-# .search_title
+-#   +adjust-font-size-to(24px)
+-#   margin-top: 0
+
+
+-# #product-variants
+-#   .field
+-#     margin: 1em 0
+-#     color: #666
+-#     text-align: right
+-#   label
+-#     display: block
+-#     color: $hi-clr
+-#   .price
+-#     color: #666
+-#     width: 100px
+-#     text-align: left
+-#   input[type="text"], input[type="number"]
+-#     width: 80px
+-# #add-to-cart-button
+-#   +adjust-font-size-to(20px)
+-#   +spl-font
+-#   padding: 0.25em 0.5em
+-#   margin: 0 auto
+
+-# .ac
+-#   text-align: center
+
+-# #cart-detail
+-#   width: 100%
+-#   th
+-#     background: $hi-clr
+-#     color: #fafafa
+-#     +ts-dark-down
+-#     +spl-font
+-#     padding: 5px
+-#     +adjust-font-size-to(16px)
+-#   .cart_row
+-#     border-bottom: 1px dotted #ccc
+-# .cart_row td
+-#   padding: 5px
+-#   vertical-align: top
+-# .order-total
+-#   +adjust-font-size-to(24px)
+-#   +spl-font
+-# #subtotal
+-#   text-align: right
+-# .cart-item-description
+-#   +adjust-font-size-to(12px)
+
+-# #checkout-link
+-#   float: right
+-#   font-size: 20px
+-#   +spl-font
+-#   +ts-dark-down
+-#   padding: 0.5em
+
+
+-# #main_container
+-#   strong, b
+-#     font-weight: bold
+-#   em
+-#     text-style: italic
+
+
+-# #filters
+-#   .price_range
+-#     input
+-#       width: 17%
+-#       margin: 5%
+-#       padding: 0.25em
+-#       &:first-of-type
+-#         margin-left: 0
+-#   .date_range
+-#     text-align: center
+-#     line-height: 24px
+-#     input
+-#     input[type="submit"]
+-#       width: 40%
+-#       padding: 0.25em
+
+
+-# #product-variants
+-#   +clearfix
+-#   li
+-#     +clearfix
+-#   label
+-#     float: right
+-#     width: 80%
+-#     &:hover
+-#       background: transparent
+-#       background-color: transparent
+
+
+-# .field
+-#   label
+-#     width: 25%
+-#     text-align: right
+-#     color: $hi-clr
+
+-# .progress-steps
+-#   +clearfix
+-#   >li
+-#     float: left
+-#     width: 24%
+-#     text-align: center
+-#     background: #888
+-#     color: #fafafa
+-#     +ts-dark
+-#   .current
+-#     background: $hi-clr
+
+-# .product_row
+-#   position: relative
+-# .sale_badge
+-#   padding: 0.5em
+-#   top: -0.5em
+-#   left: 190px
+-#   +f2r-box
+-# div.datepicker 
+-#   tbody 
+-#     td.datepickerDisabled
+-#       a
+-#         cursor: default 
+-#         &:hover
+-#           background: transparent
+-#           color: inherit
+-#     td:not .datepickerDisabled
+-#       a
+-#         cursor: pointer
+-#         text-align: center
+-#         &:hover
+-#           background: $hi-clr
+-#           color: #fff
+
+
+-# .coupons_container
+-#   +clearfix
+-#   width: 960px
+-#   margin-left: -16px
+-#   h2
+-#     margin-bottom: 0.5em
+-#     margin-left: 1em
+-#     margin-right: 1em
+-#     margin-bottom: 1em
+-# a.coupon_box
+-#   float: left
+-#   width: 448px
+-#   background-color: #f1f1f1
+-#   margin-right: 16px
+-#   margin-left: 16px
+-#   margin-bottom: 2em
+-#   .city_name
+-#     padding: 0 1em
+-#     padding-bottom: 0.5em
+-#     font-size: 0.9em
+-#   img 
+-#     width: 100%
+-#   &:hover
+-#     text-decoration: none
+-#   .coupon_title
+-#     margin: 0.5em 4%
+-#     padding-bottom: 0.5em
+-#     border-bottom: 1px dotted #ccc
+-#     padding-bottom: 0.5em
+-#     +spl-font
+-#     +adjust-font-size-to(20px)
+-#     color: #444
+-#     position: relative
+-#     &:after
+-#       position: absolute
+-#       top: 50%
+-#       font-size: 3em
+-#       font-weight: normal
+-#       right: -5px
+-#       color: $hi-clr
+-#       content: "¡ú"
+-#       +opacity(0.5)
+-#       +transition(0.1s)
+-#   &:hover
+-#     background: #222
+-#     h4.coupon_title
+-#       color: #fafafa
+-#       &:after
+-#         +opacity(1)
+
+
+
+-# #checkin-checkout
+-#   .in, .out
+-#     +adjust-font-size-to(12px)
+-#     .value
+-#       font-weight: bold
+-#       font-size: 1.25em
+-#     .small
+-#       font-size: 0.8em
+
+
+-# input[type="number"].qty_field
+-#   width: 50px

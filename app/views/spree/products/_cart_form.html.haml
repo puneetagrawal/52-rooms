@@ -1,0 +1,110 @@
+=#javascript_include_tag "/assets/store/datepicker.js?body=1"
+
+:javascript
+  function formattedDate(date){
+  return (date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate())
+  }  
+
+=hidden_field_tag("product_id",@product.id)
+
+%div  
+  -product_available_date = calender_date_format(@product)
+  =hidden_field_tag "data_price",product_available_date.to_json
+- if @product.is_hotel_listing? || @product.is_flash_sale?
+  %span.small (please click on the dates to select)
+  .date_range{:id => "date_range", :data => { :f2rid => 7 } }
+
+  
+- unless @product.is_coupon?    
+  #checkin-checkout
+    .in 
+      Checkin
+      %span.value 
+        %span#check_in_hotel.small{:style=>"cursor:pointer"} (click on calendar to select)
+        %div#check_in_calendar
+    .out 
+      Checkout
+      %span.value
+        %span#check_out_hotel.small{:style=>"cursor:pointer"} (click on calendar to select)
+        %div#check_out_calendar
+  - id_array = Array.new
+  #room_type.room_name{:style=>"display:none"}
+
+    -#@product.room_inventory.each_with_index do |room_type, i|
+      -#if !id_array.include?(room_type.room_type)
+        -#id_array << room_type.room_type     
+        =#radio_button_tag "room_type",room_type.id
+        / %span.small= Spree::OptionValue.find(room_type.room_type).name
+        / %br
+        /|
+        /-number_to_currency room_type.price
+  /=#hidden_field_tag "number_days"      
+  = form_for :order, :url => populate_f2r_orders_path do |f|
+    = f.hidden_field :check_in_date
+    = f.hidden_field :check_out_date
+    = f.hidden_field :room_type_id
+    = f.hidden_field :f2r_id, :value => (@product.room_inventory.first.id if @product.room_inventory.first)
+    = f.hidden_field :product_id, :value => (@product.id)
+    %br
+    %label.hi Number of rooms
+    = f.hidden_field :number_days,:id=>"number_days"
+    -# = f.hidden_field :room_available, :id=>"room_available"
+    = f.number_field :qty, :placeholder => "number of rooms", :min => "1", :value => "1", :class => "qty_field"
+    %br
+    %span#no_room_alert=""          
+    %br
+    %label.hi="Sub Total="
+    %span#show_subtotal="$0.00"
+    %br
+    = f.submit :value => "Book!", :class => 'btn', :id=>"bookbtn", :disabled=>true    
+
+
+
+
+
+
+  
+//%h4 Old Cart form, for verification.
+= form_for :order, :url => populate_orders_path do |f|
+  #inside-product-cart-form{"data-hook" => "inside_product_cart_form", :itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+    - if @product.has_variants? && @product.is_coupon?
+      #product-variants.columns.five.alpha
+        %h6.product-section-title Please select an option
+        %ul
+          - has_checked = false
+          - @product.variants.active.each_with_index do |v,index|
+          - next if v.option_values.empty? || (!v.in_stock && !Spree::Config[:show_zero_stock_products]) || v.date_passed?
+          - checked = !has_checked && (v.in_stock || Spree::Config[:allow_backorders])
+          - has_checked = true if checked
+            %li
+              = radio_button_tag "products[#{@product.id}]", v.id, checked, :disabled => !v.in_stock && !Spree::Config[:allow_backorders]
+              %label{:for => ['products', @product.id, v.id].join('_')}
+                -# = v.availability_map.to_yaml
+                %span.variant-description
+                  = v.option_values[0].name rescue ''                  
+                  - unless v.product.is_coupon?
+                    = v.option_values[0].presentation rescue ''
+                  %br
+                  = v.f2r_available_on.strftime('%d %b, %Y') rescue ''
+                -# - if variant_price_diff v
+                %strong
+                  %span.price= number_to_currency v.price
+    - if @product.price && @product.is_coupon?
+      .columns.five.if.alpha.else.omega{:class => "<haml:silent> !@product.has_variants? </haml:silent><haml:block> </haml:block><haml:silent> </haml:silent><haml:block> </haml:block>", "data-hook" => "product_price"}
+        %span.small (Please select the quantity)
+        - if @product.price > 0
+          #product-price
+            %h6.product-section-title= t(:price)
+            %div
+              %span.price.selling{:itemprop => "price"}= number_to_currency @product.price
+        %br
+        .add-to-cart
+          - if @product.has_stock? || Spree::Config[:allow_backorders]
+            %br
+            = number_field_tag (@product.has_variants? ? :quantity : "variants[#{@product.master.id}]"), |
+              1, :class => 'title', :in => 1..@product.on_hand, :min => 1                                |
+            %br
+            = button_tag :class => 'btn', :id => 'add-to-cart-button', :type => :submit do
+              = "Book Now"
+          - else
+            = content_tag('strong', t(:out_of_stock))

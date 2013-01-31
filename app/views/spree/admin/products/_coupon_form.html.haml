@@ -1,0 +1,34 @@
+.left
+  %h5 Please Note
+  %p you do not need to create a separate variant for this coupon to go on sale.
+  = f.inputs :name => "Coupon Details" do
+    = f.input :name
+    = f.input :description
+    = f.input :coupon_type, :as => :select, :collection => Spree::Product::COUPON_TYPES
+    - @product.available_on = @product.available_on.blank? ? Time.now : @product.available_on
+    = f.input :available_on, :hint => "Available for sale on the site"
+  = f.inputs :name => "Pricing and Inventory" do
+    = f.input :coupon_cost_price
+    = f.input :price, :as => :number
+    = f.input :coupon_discount, :as => :number
+    = f.input :coupon_policies
+.right
+  = f.inputs :name => "Rich Content" do
+    - [:overview, :location_and_attractions, :rooms, :reviews, :amenities_html].each do |field|
+      = f.input field, :input_html=>{:class=>"wysiwyg"}
+  -# = f.semantic_fields_for :coupon_active_date_range do |cadrf|
+  -#   %h3 Coupon Active
+  -#   %h5 NOTE
+  -#   %p This is the period during which the coupon will be live on sale on the site.
+  -#   = cadrf.input :starts_at, :as => :datetime
+  -#   = cadrf.input :ends_at, :as => :datetime
+  -# = f.semantic_fields_for :coupon_valid_date_range do |cvdrf|
+  -#   %h3 Coupon Valid
+  -#   %h5 NOTE
+  -#   %p This is the period during which the coupon will be valid to be used by the customer once purchased.
+  -#   = cvdrf.input :starts_at, :as => :datetime
+  -#   = cvdrf.input :ends_at, :as => :datetime
+
+
+
+

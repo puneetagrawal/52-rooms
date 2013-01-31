@@ -1,0 +1,47 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @product }
+= semantic_form_for [:admin, @product], :html => { :multipart => true } do |f|
+  %fieldset{"data-hook" => "new_product"}
+    .clearfix{"data-hook" => "new_product_attrs"}
+      .left
+        = f.inputs :name => "Basic Info" do
+          = f.input :name
+          = f.input :product_type, :as => :radio, :collection => Spree::Product::PRODUCT_TYPES
+          = f.input :price, :as => :hidden, :input_html => { :value => "0" }
+        -# - unless @product.has_variants?
+        -#   = f.field_container :sku do
+        -#     = f.label :sku, t(:sku)
+        -#     %br/
+        -#     = f.text_field :sku, :size => 16
+        -#     = f.error_message_on :sku
+        -# = f.field_container :prototype do
+        -#   = f.label :prototype_id, t(:prototype)
+        -#   %br/
+        -#   = f.collection_select :prototype_id, Spree::Prototype.all, :id, :name, :include_blank => true
+      -# .right
+      -#   %p
+      -#     = f.label :available_on, t(:available_on)
+      -#     %br/
+      -#     = f.error_message_on :available_on
+      -#     = f.text_field :available_on, :class => 'datepicker', :style => "width:150px"
+    #product-from-prototype.clearfix{"data-hook" => "product-from-prototype"}
+      = render :file => 'spree/admin/prototypes/show' if @prototype
+    = render :partial => 'spree/admin/shared/new_resource_links'
+:javascript
+  //
+    (function($){
+      var base_url = "#{admin_prototypes_url}";
+      var prototype_select = $('#product_prototype_id');    
+      prototype_select.change(function() {
+        var id = prototype_select.val();
+        if (id.length) {
+          $('#product-from-prototype').load([ base_url, id ].join("/"));
+        } else {
+          $('#product-from-prototype').empty();
+        }
+      })
+      if (prototype_select.html() == "") {
+        prototype_select.change();
+      }
+    })(jQuery);
+  //
